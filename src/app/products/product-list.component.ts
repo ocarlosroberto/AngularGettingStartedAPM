@@ -28,6 +28,7 @@ export class ProductListComponent implements OnInit, OnDestroy {
     filteredProducts: IProduct[] = [];
 
     products: IProduct[] = [];
+    items: string[] = [];
 
     constructor(private productService: ProductService) {
 
@@ -45,6 +46,8 @@ export class ProductListComponent implements OnInit, OnDestroy {
             },
             error: err => this.errorMessage = err,
         });
+        
+        this.productService.getItems().subscribe({next: items => {this.items = items}});
     }
 
     ngOnDestroy(): void{
